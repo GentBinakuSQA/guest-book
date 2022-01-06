@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Big from 'big.js';
 
-export default function Form({ onSubmit, currentUser }) {
+export default function Form({ onSubmit, user, balance }) {
   return (
     <form onSubmit={onSubmit}>
       <fieldset id="fieldset">
-        <p>Sign the guest book, { currentUser.accountId }!</p>
+        <p>Sign the guest book, { user }!</p>
         <p className="highlight">
           <label htmlFor="message">Message:</label>
           <input
@@ -20,11 +20,8 @@ export default function Form({ onSubmit, currentUser }) {
           <label htmlFor="donation">Donation (optional):</label>
           <input
             autoComplete="off"
-            defaultValue={'0'}
             id="donation"
-            max={Big(currentUser.balance).div(10 ** 24)}
-            min="0"
-            step="0.01"
+            max="10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
             type="number"
           />
           <span title="NEAR Tokens">Ⓝ</span>
@@ -40,7 +37,7 @@ export default function Form({ onSubmit, currentUser }) {
 Form.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   currentUser: PropTypes.shape({
-    accountId: PropTypes.string.isRequired,
-    balance: PropTypes.string.isRequired
+    accountId: PropTypes.any.isRequired,
+    balance: PropTypes.any.isRequired
   })
 };
